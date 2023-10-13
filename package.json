@@ -1,0 +1,26 @@
+{
+  "name": "create-uni-component",
+  "version": "1.0.0",
+  "description": "Create uni component scaffold.",
+  "main": "index.js",
+  "bin": {
+    "create-uni-component": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/zivyuan/create-uni-component.git"
+  },
+  "keywords": [
+    "uniapp",
+    "component",
+    "uni-plugin"
+  ],
+  "author": "ziv.yuan@gmail.com",
+  "bugs": {
+    "url": "https://github.com/zivyuan/create-uni-component/issues"
+  },
+  "license": "MIT"
+}
