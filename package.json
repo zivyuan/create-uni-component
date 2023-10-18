@@ -1,6 +1,6 @@
 {
   "name": "create-uni-component",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "uniapp 前端项目脚手架",
   "main": "index.mjs",
   "bin": {
@@ -27,6 +27,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "inquirer": "^8.2.6"
+    "inquirer": "^9.2.11"
   }
 }

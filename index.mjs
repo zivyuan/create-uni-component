@@ -2,8 +2,7 @@
 
 import path from "path";
 import fs from "fs";
-
-const inquirer = require("inquirer");
+import inquirer from "inquirer";
 
 const validPluginId = (id) => {
   if (/^[a-z]\-?$/.test(id)) return "插件作者名需要至少2个字符。";
@@ -56,7 +55,10 @@ const questions = [
     message: "插件名称(40字)：",
     validate: (value) => {
       value = value.trim();
-      if (!/^(?!_)(?!.*?_$)[a-zA-Z0-9_\u4e00-\u9fa5]{3,40}$/.test(value))
+      if (/^[_0-9]/.test(value)) {
+        return '插件名称不能以数字或下划线开始'
+      }
+      if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]{3,40}$/.test(value))
         return "插件名称只能包含汉字、数字、字母、下划线，长度为 3-40 个字符";
 
       return true;
@@ -125,11 +127,10 @@ console.log("");
 //
 // ----------------------------------------
 
-$.verbose = true;
+console.log('下载模板...')
 await $`git clone --depth 1 https://gitee.com/zivyuan/zui-component-starter.git "${fullpath}"
 rm -rf "${fullpath}/.git"
 `;
-$.verbose = false;
 
 if (answers.author !== "zivyuan") {
   try {
@@ -139,6 +140,7 @@ if (answers.author !== "zivyuan") {
   }
 }
 
+console.log('配置模板信息...')
 fs.mkdirSync(fullpath, { recursive: true });
 
 fs.renameSync(
@@ -186,17 +188,15 @@ updatePluginInfo(
 );
 updatePluginInfo(`${fullpath}/src/pages/index/index.vue`);
 
-$.verbose = true;
+console.log('安装依赖...')
 await $`cd "${fullpath}"; npm install`
-$.verbose = false;
-
 await $`cd "${fullpath}"
 git init
 git add .
 git commit -m "initial"
 `;
 
-console.log(`插件 ${answers.displayName} 初始化完成，输入以下命令开始吧`)
+console.log(`初始化完成，编程快乐！`)
 console.log(``)
 console.log(`> cd ${answers.pluginId}`)
 console.log(`> npm run dev`)
